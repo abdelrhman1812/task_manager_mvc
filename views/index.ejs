@@ -1,0 +1,120 @@
+<%- include('./shared/header.ejs') %>
+
+
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <%- include('./shared/sidebar.ejs') %>
+
+      <!-- Sidebar Ends -->
+      <!-- Main Component -->
+      <div class="main">
+        <!-- Nav -->
+
+        <%- include('./shared/nav.ejs') %>
+
+          <main class="p-3">
+            <div class="container-fluid">
+              <div class="mb-3 text-center">
+                <h1>Tasks</h1>
+
+                <!-- <%= user?.name %> -->
+
+                <div class="row g-5">
+                  <% if (tasks.length> 0) { %>
+                    <% tasks.forEach(task=> { %>
+                      <div class="col-md-6 col-lg-4">
+                        <div class="item shadow-lg position-relative overflow-hidden  rounded-3">
+
+                          <% if (task.completed) { %>
+                            <figure>
+                              <img
+                                src="https://img.freepik.com/premium-vector/amazing-doodle-sticker-done_203633-9581.jpg?w=740"
+                                class="w-100" alt="">
+                            </figure>
+                            <% } %>
+
+                              <div class="head p-1 rounded-top-3 <% if (task.completed) { %>completed-Task<% } %>   ">
+                                <h3>
+                                  <%= task.title %>
+                                </h3>
+                              </div>
+                              <div class="body py-2">
+                                <p>
+                                  <%= task.description %>
+                                </p>
+                                <div class="item-footer px-3 pb-1 d-flex justify-content-end gap-3">
+                                  <a href="/tasks/updateTask/<%= task.id %>">
+                                    <i class='bx text-info fs-3 bx-edit-alt'></i>
+
+                                  </a>
+                                  <a href="/tasks/handleDelete/<%= task.id %>">
+                                    <i class='bx text-danger fs-3 bx-message-alt-x'></i>
+
+                                  </a>
+                                  <form action="/tasks/toggle-task-status" method="POST" id="task-form">
+                                    <input type="hidden" name="taskId" value="<%= task.id %>" />
+                                    <label>
+                                      <input type="checkbox" class="position-relative z-3" name="completed"
+                                        onchange="this.form.submit()" <% if (task.completed) { %>
+                                      checked
+                                      <% } %>
+
+                                        />
+
+                                    </label>
+                                  </form>
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                      <% }) %>
+                        <% } else { %>
+                          <div class="col-md-12">
+                            <p>No tasks available.</p>
+                          </div>
+                          <% } %>
+                </div>
+
+
+
+              </div>
+            </div>
+          </main>
+      </div>
+  </div>
+
+
+  <!-- Start Modal   -->
+  <!-- <div class="container d-flex align-items-center align-content-center mh-100">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Tasks </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="/tasks/add-task" method="post">
+            <div class="modal-body">
+            
+                  <input type="text" class="form-control my-3" placeholder="title" name="title">
+                  <textarea type="text" class="form-control my-3" placeholder="description"
+                    name="description"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add Task</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- End Modal   -->
+
+
+  <%- include('./shared/footer.ejs') %>
+
+
+    <!-- https://codepen.io/rohanrit/pen/ZExxrmK -->
+
+    <!-- https://codepen.io/wisnust10/pen/qZaPBY -->

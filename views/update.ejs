@@ -1,0 +1,45 @@
+<%- include('./shared/header.ejs') %>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <%- include('./shared/sidebar.ejs') %>
+
+            <!-- Sidebar Ends -->
+
+            <!-- Main Component -->
+            <div class="main">
+
+                <!-- Nav -->
+
+                <%- include('./shared/nav.ejs') %>
+
+                    <main class="p-3">
+                        <div class="container-fluid">
+                            <div class="mb-3 text-center">
+                                <h1>Update Task</h1>
+                                <div class="row-form">
+
+                                    <form action="/tasks/handleUpdateTask/<%= task._id %>" method="post">
+                                        <% if (error) { %>
+                                            <span class="text-danger">
+                                                <%= error %>
+                                            </span>
+                                            <% } %>
+
+                                                <input type="text" class="form-control my-3" name="title"
+                                                    placeholder="Title" value="<%= data.title || "" %>">
+
+                                                <textarea name="description" class="form-control"
+                                                    placeholder="Description"><%= data.description || "" %></textarea>
+
+                                                <button type="submit" class="btn btn-outline-dark my-2">Update
+                                                    Task</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </main>
+            </div>
+    </div>
+
+    <%- include('./shared/footer.ejs') %>

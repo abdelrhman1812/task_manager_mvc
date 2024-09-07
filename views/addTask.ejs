@@ -1,0 +1,46 @@
+<%- include('./shared/header.ejs') %>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <%- include('./shared/sidebar.ejs') %>
+
+      <!-- Sidebar Ends -->
+
+      <!-- Main Component -->
+      <div class="main">
+
+        <!-- Nav -->
+
+        <%- include('./shared/nav.ejs') %>
+
+          <main class="py-3">
+            <div class="container-fluid">
+              <div class="mb-3 text-center">
+                <h1>Add Task</h1>
+                <div class="row-form ">
+                  <form action="/tasks/handleAddTask" class="form-task " method="post">
+
+                    <% if (error?.length> 0 || validationError?.length > 0) { %>
+                      <span class="text-danger">
+                        <%= error[0] || validationError[0] %>
+                      </span>
+                      <% } %>
+                        <input type="text" class="form-control my-3 " name="title" placeholder="Title"
+                          value="<%= data.title || "" %>">
+
+
+
+                        <textarea name="description" class="form-control"
+                          placeholder="Description"><%= data.description || "" %></textarea>
+
+
+                        <button type="submit" class="btn btn-outline-dark my-2">Add Task</button>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </main>
+      </div>
+  </div>
+
+  <%- include('./shared/footer.ejs') %>
